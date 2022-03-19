@@ -17,7 +17,7 @@ public class TestDatabase {
     @Value("#{systemEnvironment['DB_USER_NAME']}")
     private String userName;
     @Value("#{systemEnvironment['DB_PASSWORD']}")
-    private String passsword;
+    private String password;
 
     @Bean
     public DriverManagerDataSource getDataSource() {
@@ -25,7 +25,7 @@ public class TestDatabase {
         bds.setDriverClassName("org.postgresql.Drive");
         bds.setUrl("jdbc:mysql://%s:5432/%s".formatted(dbHost, dbName));
         bds.setUsername(userName);
-        bds.setPassword(passsword);
+        bds.setPassword(password);
 
         return bds;
     }

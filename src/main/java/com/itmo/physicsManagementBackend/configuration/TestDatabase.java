@@ -8,7 +8,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class TestDatabase {
     @Value("#{systemEnvironment['DB_HOST']}")
     private String dbHost;

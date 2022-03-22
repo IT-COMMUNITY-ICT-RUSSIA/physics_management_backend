@@ -1,3 +1,18 @@
 spring:
   profiles:
     active: "dev"
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto:
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+  datasource:
+    initialization-mode: always
+  h2:
+    console:
+      enabled: true

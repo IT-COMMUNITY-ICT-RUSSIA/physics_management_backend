@@ -8,7 +8,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @Configuration
-@Profile("test")
+@Profile({"test", "prod"})
 public class TestDatabase {
     @Value("#{systemEnvironment['DB_HOST']}")
     private String dbHost;
@@ -26,8 +26,8 @@ public class TestDatabase {
         bds.setUrl("jdbc:mysql://%s:5432/%s".formatted(dbHost, dbName));
         bds.setUsername(userName);
         bds.setPassword(password);
+        bds.setSchema(null);
 
         return bds;
     }
-
 }

@@ -12,7 +12,7 @@ public class DevDatabase {
     @Bean
     public DriverManagerDataSource getDataSource() {
         DriverManagerDataSource bds = new DriverManagerDataSource();
-        bds.setUrl("jdbc:h2:mem:testdb");
+        bds.setUrl("jdbc:h2:file:/tmp/testdb");
 
         return bds;
     }

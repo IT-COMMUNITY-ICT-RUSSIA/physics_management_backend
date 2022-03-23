@@ -1,6 +1,8 @@
 package com.itmo.physicsManagementBackend.jpa;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.UUID;
 @Table(name = "lab_work_entry")
 @NamedEntityGraph(name = "entry-lab-work-entity-graph",
         attributeNodes = {@NamedAttributeNode("labWork")})
+@NoArgsConstructor
+@AllArgsConstructor
 public class LabWorkEntry {
     @Getter
     @Setter

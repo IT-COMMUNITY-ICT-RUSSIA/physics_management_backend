@@ -6,12 +6,12 @@ class GenericResponse(BaseModel):
     details: str = "Success"
 
 
+class Token(BaseModel):
+    token: str
+
+
 class User(BaseModel):
     username: str
-
-
-class UserHashedPassword(User):
-    hashed_password: str
 
 
 class UserPassword(User):

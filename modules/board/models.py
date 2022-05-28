@@ -1,3 +1,5 @@
+import typing
+
 from pydantic import BaseModel
 
 from modules.auth.models import User, UserInformation
@@ -9,7 +11,7 @@ class GenericResponse(BaseModel):
 
 
 class BoardOut(GenericResponse):
-    board: dict[int, list[str | None]]
+    board: dict[int, list[typing.Any | None]]
 
 
 class BoardSlotOut(GenericResponse):

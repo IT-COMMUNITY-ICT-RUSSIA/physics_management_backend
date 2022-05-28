@@ -22,5 +22,14 @@ async def setCoord(
     except Exception as e:
         return GenericResponse(status=500, details=f"Ошибка! {e}")
 
-
-    
+@router.post("/setup/command")
+async def setCapacity(
+    action: str,
+    capacity1: int,
+    capacity2: int
+):
+    try:
+        request = requests.post("/setup/command?{action}&setcapacity1={capacity1}&setcapacity2={capacity2}")
+        return request
+    except Exception as e:
+        return GenericResponse(status=500, details=f"Ошибка! {e}")

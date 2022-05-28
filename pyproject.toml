@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "physics_management_backend"
+version = "0.0.1"
+description = ""
+authors = ["Timofeev Nikolas <timofeevnik41@gmail.com>"]
+license = "GNU GPL3"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.75.2"
+cryptography = "^37.0.1"
+passlib = "^1.7.4"
+bcrypt = "^3.2.0"
+python-jose = "^3.3.0"
+uvicorn = "^0.17.6"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+mypy = "^0.950"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

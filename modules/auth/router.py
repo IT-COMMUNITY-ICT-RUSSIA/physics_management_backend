@@ -7,8 +7,8 @@ from modules.auth.dependencies import create_access_token, get_user_data, auth_u
 router = APIRouter()
 
 
-@router.get("/me", response_model=UserInformationOut | GenericResponse)
-async def get_user(user: UserInformation = Depends(get_user_data)) -> None:
+@router.get("/me", response_model=UserInformationOut)
+async def get_user(user: UserInformation = Depends(get_user_data)) -> UserInformationOut:
     """Получение данных пользователя по токену"""
     return UserInformationOut(user=user)
 

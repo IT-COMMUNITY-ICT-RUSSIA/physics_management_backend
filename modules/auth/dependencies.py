@@ -1,11 +1,9 @@
-from calendar import c
-import os
 from fastapi import Depends, HTTPException
 
 from jose import JWTError, jwt
 from pydantic import parse_obj_as
 
-from modules.auth.models import User, UserInformation, UserPassword
+from modules.auth.models import User, UserInformation, UserPassword, Token
 
 SECRET_KEY = "testing"
 ALGORITHM = "HS256"
@@ -26,13 +24,13 @@ async def create_access_token(
     return encoded_jwt
 
 
-async def auth_user(username: str, password: str) -> UserPassword:
-    if await verify_password(password):
-        return UserPassword(username=username, password=password)
+async def auth_user(credentials: UserPassword) -> UserPassword:
+    if await verify_password(credentials.password):
+        return UserPassword(username=credentials.username, password=credentials.password)
     raise HTTPException(status_code=403, detail="Failed to verify password")
 
 
-async def get_current_user(token: str) -> UserPassword:
+async def get_current_user(token: str) -> User:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("login")

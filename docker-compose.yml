@@ -1,0 +1,10 @@
+version: "3"
+services:
+  phys_backend:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+        - .env
+    ports:
+      - "5042:8000"

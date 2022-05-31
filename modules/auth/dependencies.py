@@ -1,9 +1,11 @@
+from loguru import logger
+
 from fastapi import Depends, HTTPException
 
 from jose import JWTError, jwt
 from pydantic import parse_obj_as
 
-from modules.auth.models import User, UserInformation, UserPassword, Token
+from modules.auth.models import User, UserInformation, UserPassword
 
 SECRET_KEY = "testing"
 ALGORITHM = "HS256"
@@ -41,7 +43,7 @@ async def get_current_user(token: str) -> User:
         user: User = User(username=username)
 
     except JWTError:
-        raise ValueError("Failed to decode jwt token")
+        raise HTTPException(status_code=500, detail="Failed to decode jwt token")
 
     except Exception as e:
         raise HTTPException(404, str(e))

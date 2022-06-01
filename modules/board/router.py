@@ -25,10 +25,19 @@ async def add_user_to_board(
     row: int,
     user: UserInformation = Depends(get_user_data),
 ) -> GenericResponse:
-    # try:
+    try:
         logger.info(user)
         await BOARD.update_slot(row=row, col=col, user=user)
         logger.info(await BOARD.get_board())
         return GenericResponse(status=200, details=f"OK")
-    # except Exception as e:
-    #     return GenericResponse(status=500, details=f"Ошибка! {e}")
+    except Exception as e:
+        return GenericResponse(status=500, details=f"Ошибка! {e}")
+
+
+@router.delete("/board")
+async def remove_user_from_board(col: int,row: int) -> GenericResponse:
+    try:
+        await BOARD.clear_slot(row=row, col=col)
+        return GenericResponse(status=200, details=f"OK")
+    except Exception as e:
+        return GenericResponse(status=500, details=f"Ошибка! {e}")

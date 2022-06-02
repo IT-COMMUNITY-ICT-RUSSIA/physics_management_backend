@@ -26,11 +26,10 @@ async def add_user_to_board(
     user: UserInformation = Depends(get_user_data),
 ) -> GenericResponse:
     try:
-        logger.info(user)
         await BOARD.update_slot(row=row, col=col, user=user)
-        logger.info(await BOARD.get_board())
         return GenericResponse(status=200, details=f"OK")
     except Exception as e:
+        logger.warning(f"Failed to add user to board: {e}")
         return GenericResponse(status=500, details=f"Ошибка! {e}")
 
 
@@ -40,4 +39,5 @@ async def remove_user_from_board(col: int,row: int) -> GenericResponse:
         await BOARD.clear_slot(row=row, col=col)
         return GenericResponse(status=200, details=f"OK")
     except Exception as e:
+        logger.warning(f"Failed to remove user from board: {e}")
         return GenericResponse(status=500, details=f"Ошибка! {e}")

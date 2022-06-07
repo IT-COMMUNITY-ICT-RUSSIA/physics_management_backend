@@ -31,7 +31,7 @@ async def setupCommand(
             case "form":
                 request = requests.get(f"{link}&form={form}")
             case _:
-                return GenericResponse(status=400, details="Wrong request")
+                return GenericResponse(status=400, details="Неправильный запрос")
         return request.json()
     except Exception as e:
         return GenericResponse(status=500, details=f"Ошибка! {e}")

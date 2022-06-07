@@ -59,7 +59,7 @@ async def setupCommand(
             case "setcoord":
                 request = requests.get(f"http://{IP}/setup/command?{action}={variable1}")
             case _:
-                return GenericResponse(status=400, details="Wrong request")
+                return GenericResponse(status=400, details="Неправильный запрос")
         return request.json()
     except Exception as e:
         return GenericResponse(status=500, details=f"Ошибка! {e}")

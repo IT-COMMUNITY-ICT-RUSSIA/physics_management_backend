@@ -21,7 +21,7 @@ async def setupCommand(
         return GenericResponse(status=500, details=f"Ошибка! {e}")
 
 
-@router.get("/generator/command")
+@router.get("/oscilloscope/command")
 async def setupCommand(
     action: str,
     channel: str,  # Value of this parameter is only "1" or "2"

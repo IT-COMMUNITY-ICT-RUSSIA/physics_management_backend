@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.get("/oscilloscope/status")
 async def setupCommand(
-    channel: str # Value of this parameter is only "1" or "2"
+    channel: str  # Value of this parameter is only "1" or "2"
 ):
     try:
         link = f"http://{IP}/oscilloscope/status?channel={channel}"
@@ -24,7 +24,7 @@ async def setupCommand(
 @router.get("/oscilloscope/command")
 async def setupCommand(
     action: str,
-    channel: str,  # Value of this parameter is only "1" or "2"
+    channel: str | None = None,  # Value of this parameter is only "1" or "2"
     display: str | None = None  # Value of this parameter is only "ON" or "OFF"
 ):
     try:
@@ -33,7 +33,7 @@ async def setupCommand(
         match action:
             case "display":
                 request = requests.get(f"{link}channel={channel}&display={display}")
-            case "autoset":
+            case "autoSet":
                 request = requests.get(f"{link}autoset")
             case _:
                 return GenericResponse(status=400, details="Неправильный запрос")

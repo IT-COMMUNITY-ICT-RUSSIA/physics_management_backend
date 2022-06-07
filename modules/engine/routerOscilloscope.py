@@ -9,21 +9,34 @@ IP = "192.168.192.126:1880"
 router = APIRouter()
 
 
-@router.get("/setup/command2")
+@router.get("/oscilloscope/status")
+async def setupCommand(
+    channel: str # Value of this parameter is only "1" or "2"
+):
+    try:
+        link = f"http://{IP}/oscilloscope/status?channel={channel}"
+        request = requests.get(link)
+        return request.json()
+    except Exception as e:
+        return GenericResponse(status=500, details=f"Ошибка! {e}")
+
+
+@router.get("/generator/command")
 async def setupCommand(
     action: str,
-    variable1: int,
-    variable2: int | None = None
+    channel: str,  # Value of this parameter is only "1" or "2"
+    display: str | None = None  # Value of this parameter is only "ON" or "OFF"
 ):
     try:
         request: Response
+        link = f"http://{IP}/generator/command?"
         match action:
-            case "setcapacity":
-                request = requests.get(f"http://{IP}/setup/command?{action}&setcapacity1={variable1}&setcapacity2={variable2}")
-            case "setcoord":
-                request = requests.get(f"http://{IP}/setup/command?{action}={variable1}")
+            case "display":
+                request = requests.get(f"{link}channel={channel}&display={display}")
+            case "autoset":
+                request = requests.get(f"{link}autoset")
             case _:
-                return GenericResponse(status=400, details="Wrong request")
+                return GenericResponse(status=400, details="Неправильный запрос")
         return request.json()
     except Exception as e:
         return GenericResponse(status=500, details=f"Ошибка! {e}")

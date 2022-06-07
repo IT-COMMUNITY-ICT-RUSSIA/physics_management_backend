@@ -48,16 +48,17 @@ async def getStatus():
 @router.get("/setup/command")
 async def setupCommand(
     action: str,
-    variable1: int,
-    variable2: int | None = None
+    coord: int | None = None,  # Value of this parameter is only between 0 and 230
+    capacity1: int | None = None,  # Value of this parameter is only "1" or "2"
+    capacity2: int | None = None  # Value of this parameter is only "1" or "2" or "3"
 ):
     try:
         request: Response
         match action:
-            case "setcapacity":
-                request = requests.get(f"http://{IP}/setup/command?{action}&setcapacity1={variable1}&setcapacity2={variable2}")
-            case "setcoord":
-                request = requests.get(f"http://{IP}/setup/command?{action}={variable1}")
+            case "setCapacity":
+                request = requests.get(f"http://{IP}/setup/command?{action}&setСapacity1={capacity1}&setСapacity2={capacity2}")
+            case "setCoord":
+                request = requests.get(f"http://{IP}/setup/command?{action}={coord}")
             case _:
                 return GenericResponse(status=400, details="Неправильный запрос")
         return request.json()

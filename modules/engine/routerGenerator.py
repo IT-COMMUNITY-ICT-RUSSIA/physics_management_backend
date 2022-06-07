@@ -11,12 +11,12 @@ router = APIRouter()
 
 @router.get("/generator/command")
 async def setupCommand(
-    channel: str,
+    channel: str, # Value of this parameter is only "1" or "2"
     action: str,
-    launching: str | None = None,
-    vpp: float | None = None,
-    freq: int | None = None,
-    form: str | None = None
+    launching: str | None = None,  # Value of this parameter is only "ON" or "OFF"
+    vpp: float | None = None,  # Value of this parameter is only between 0.0 and 10.0
+    freq: int | None = None,  # Value of this parameter is only between 0 and 2000000
+    form: str | None = None  # Value of this parameter is only "SINE"/"SQUARE"/"RAMP"/"PULSE"/"NOISE"/"ARB"
 ):
     try:
         request: Response

@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from modules.auth.router import router as auth_router
 from modules.board.router import router as board_router
+from modules.engine.router import router as engine_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -17,3 +18,4 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(board_router)
+app.include_router(engine_router)

@@ -11,7 +11,7 @@ class GenericResponse(BaseModel):
 
 
 class BoardOut(GenericResponse):
-    board: dict[int, list[UserInformation | None]]
+    board: dict[str, list[UserInformation | None]]
 
 
 class BoardSlotOut(GenericResponse):

@@ -1,3 +1,5 @@
+import typing
+
 from pydantic import BaseModel
 
 from modules.auth.models import UserInformation
